@@ -1,8 +1,34 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
+# ==================================
+# Smart Library - Root .gitignore
+# ==================================
+
+# === Docker Volumes / Local Data ===
+mysql_data/
+chroma_data/
+
+# === Backend (Spring Boot) ===
+Backend/target/
+Backend/.mvn/wrapper/maven-wrapper.jar
+Backend/uploads/
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+# === Frontend (React / Vite) ===
+Frontend/node_modules/
+Frontend/dist/
+Frontend/dist-ssr/
+Frontend/.tanstack/
+Frontend/*.local
+Frontend/.env*
+!Frontend/.env.example
+
+# === IDEs and Editors ===
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+*.code-workspace
 
 ### STS ###
 .apt_generated
@@ -12,12 +38,6 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
 
 ### NetBeans ###
 /nbproject/private/
@@ -29,6 +49,11 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode/
-node_modules
+# === OS generated files ===
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

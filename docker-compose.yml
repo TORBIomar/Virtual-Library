@@ -1,0 +1,55 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: smartlibrary-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: smart_library_db
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: smartlibrary-chromadb
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./chroma_data:/data
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: smartlibrary-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # Connect to the MySQL container
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/smart_library_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      # Connect to the ChromaDB container
+      SPRING_AI_VECTORSTORE_CHROMA_CLIENT_HOST: http://chromadb
+      SPRING_AI_VECTORSTORE_CHROMA_CLIENT_PORT: 8000
+    volumes:
+      - ./Backend/uploads:/app/uploads
+    depends_on:
+      - mysql
+      - chromadb
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: smartlibrary-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
