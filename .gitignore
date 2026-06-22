@@ -10,7 +10,7 @@ chroma_data/
 Backend/target/
 Backend/.mvn/wrapper/maven-wrapper.jar
 Backend/uploads/
-application.properties
+Backend/src/main/resources/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
