@@ -35,12 +35,17 @@ The absolute easiest way to run the entire stack is using Docker Compose.
    cd Virtual-Library
    ```
 
-2. Start the stack:
+2. Create an `.env` file in the root directory and add your Gemini API key:
+   ```bash
+   echo "GEMINI_API_KEY=your_api_key_here" > .env
+   ```
+
+3. Start the stack:
    ```bash
    docker-compose up --build -d
    ```
 
-3. Access the application:
+4. Access the application:
    - Open your browser and navigate to `http://localhost:3000`
    - Register a new account.
    - Go to the Admin dashboard to configure your Gemini API Key and upload your first book!
