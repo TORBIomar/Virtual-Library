@@ -46,7 +46,7 @@ const mapBook = (b: BackendBook): Book => ({
   author: b.author,
   category: b.category,
   cover: b.coverImageUrl && b.coverImageUrl.startsWith("/")
-    ? `${import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8080/api"}${b.coverImageUrl.replace("/api", "")}`
+    ? `${import.meta.env.VITE_API_BASE_URL ?? "/api"}${b.coverImageUrl.replace("/api", "")}`
     : b.coverImageUrl || "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=600",
   description: b.summary || "",
   year: b.year || 2024,

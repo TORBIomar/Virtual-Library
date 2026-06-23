@@ -66,7 +66,7 @@ function ReaderPage() {
         <div className="flex-1 min-w-0 border-r border-border/30">
           <BookReader book={book} />
         </div>
-        <AIChat book={book} />
+        <AIChat book={book} inline={true} />
       </div>
 
     </div>

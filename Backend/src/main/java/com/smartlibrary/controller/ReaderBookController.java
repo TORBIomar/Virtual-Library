@@ -79,7 +79,9 @@ public class ReaderBookController {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Book", "id", id));
 
-        Path filePath = Paths.get(book.getFilePath());
+        String rawPath = book.getFilePath();
+        String filename = rawPath.substring(Math.max(rawPath.lastIndexOf('/'), rawPath.lastIndexOf('\\')) + 1);
+        Path filePath = Paths.get(uploadDir).resolve(filename);
         if (!Files.exists(filePath)) {
             return ResponseEntity.notFound().build();
         }
@@ -157,7 +159,9 @@ public class ReaderBookController {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Book", "id", id));
 
-        Path filePath = Paths.get(book.getFilePath());
+        String rawPath = book.getFilePath();
+        String filename = rawPath.substring(Math.max(rawPath.lastIndexOf('/'), rawPath.lastIndexOf('\\')) + 1);
+        Path filePath = Paths.get(uploadDir).resolve(filename);
         if (!Files.exists(filePath)) {
             return ResponseEntity.notFound().build();
         }

@@ -39,13 +39,8 @@ function Landing() {
             >
               Get started <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link
-              to="/login"
-              className="px-8 py-3.5 rounded-full glass-strong font-medium hover:bg-surface-elevated transition-all duration-300 text-white/80 hover:text-white"
-            >
-              Sign in
-            </Link>
           </div>
+
         </div>
       </section>
 

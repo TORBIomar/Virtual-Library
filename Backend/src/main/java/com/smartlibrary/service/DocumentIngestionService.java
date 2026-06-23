@@ -3,7 +3,6 @@ package com.smartlibrary.service;
 import com.smartlibrary.entity.Book;
 import com.smartlibrary.exception.ResourceNotFoundException;
 import com.smartlibrary.repository.BookRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
@@ -18,18 +17,28 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class DocumentIngestionService {
 
     private final VectorStore vectorStore;
     private final BookRepository bookRepository;
 
+    public DocumentIngestionService(Optional<VectorStore> vectorStore, BookRepository bookRepository) {
+        this.vectorStore = vectorStore.orElse(null);
+        this.bookRepository = bookRepository;
+    }
+
     @Transactional(readOnly = true)
     public void ingestBook(UUID bookId) {
+        if (vectorStore == null) {
+            log.warn("VectorStore is not available. Skipping ingestion for book: {}", bookId);
+            return;
+        }
+
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new ResourceNotFoundException("Book", "id", bookId));
 
@@ -91,6 +100,10 @@ public class DocumentIngestionService {
     }
 
     public void deleteBookVectors(UUID bookId) {
+        if (vectorStore == null) {
+            log.warn("VectorStore is not available. Skipping vector deletion for book: {}", bookId);
+            return;
+        }
         log.info("Deleting existing vectors for book ID: {}", bookId);
         try {
             vectorStore.delete(new FilterExpressionBuilder().eq("bookId", bookId.toString()).build());
@@ -99,3 +112,4 @@ public class DocumentIngestionService {
         }
     }
 }
+

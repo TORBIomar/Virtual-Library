@@ -8,8 +8,8 @@ export const Route = createFileRoute("/login")({ component: LoginPage });
 function LoginPage() {
   const { login } = useAuth();
   const router = useRouter();
-  const [email, setEmail] = useState("reader@smartlib.dev");
-  const [password, setPassword] = useState("demo");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -56,11 +56,6 @@ function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-border/30">
-            <div className="text-xs text-center text-muted-foreground">
-              Demo: <code className="text-white/60 bg-white/5 px-1.5 py-0.5 rounded">reader@smartlib.dev</code> or <code className="text-white/60 bg-white/5 px-1.5 py-0.5 rounded">admin@smartlib.dev</code> (any password)
-            </div>
-          </div>
           <div className="mt-4 text-sm text-center">
             New here? <Link to="/register" className="text-white/80 hover:text-white hover:underline transition-colors">Create an account</Link>
           </div>

@@ -5,7 +5,7 @@ import axios from "axios";
  * Swap VITE_API_BASE_URL once your backend is ready.
  */
 export const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8080/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? "/api",
   headers: { "Content-Type": "application/json" },
 });
 

@@ -37,6 +37,8 @@ services:
       # Connect to the ChromaDB container
       SPRING_AI_VECTORSTORE_CHROMA_CLIENT_HOST: http://chromadb
       SPRING_AI_VECTORSTORE_CHROMA_CLIENT_PORT: 8000
+      # Google Gemini API key
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
     volumes:
       - ./Backend/uploads:/app/uploads
     depends_on:
@@ -50,6 +52,18 @@ services:
     container_name: smartlibrary-frontend
     restart: unless-stopped
     ports:
-      - "3000:80"
+      - "5173:3000"
     depends_on:
+      - backend
+
+  nginx:
+    image: nginx:alpine
+    container_name: smartlibrary-nginx
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    volumes:
+      - ./Frontend/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
       - backend

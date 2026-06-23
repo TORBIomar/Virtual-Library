@@ -8,11 +8,13 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { useRouterState } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LibraryProvider } from "@/contexts/LibraryContext";
+import { AIChat } from "@/components/AIChat";
 
 function NotFoundComponent() {
   return (
@@ -93,11 +95,15 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useRouterState({ select: (s) => s.location.pathname });
+  // Hide the floating chat on the reader page — it has its own inline sidebar
+  const showGlobalChat = !location.startsWith("/reader/");
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <LibraryProvider>
           <Outlet />
+          {showGlobalChat && <AIChat />}
         </LibraryProvider>
       </AuthProvider>
     </QueryClientProvider>

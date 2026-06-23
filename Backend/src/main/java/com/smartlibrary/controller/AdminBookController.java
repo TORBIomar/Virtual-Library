@@ -6,6 +6,7 @@ import com.smartlibrary.dto.ReviewResponse;
 import com.smartlibrary.entity.Book;
 import com.smartlibrary.exception.ResourceNotFoundException;
 import com.smartlibrary.repository.BookRepository;
+import com.smartlibrary.service.DocumentIngestionService;
 import com.smartlibrary.service.UserService;
 import com.smartlibrary.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,7 @@ public class AdminBookController {
     private final BookRepository bookRepository;
     private final UserService userService;
     private final ReviewService reviewService;
+    private final DocumentIngestionService documentIngestionService;
 
     @Value("${smartlibrary.books.upload-dir:./uploads/books}")
     private String uploadDir;
@@ -87,6 +89,17 @@ public class AdminBookController {
         }
         saved = bookRepository.save(saved);
 
+        // Auto-ingest book into ChromaDB for AI chat (async to not block response)
+        final UUID savedId = saved.getId();
+        new Thread(() -> {
+            try {
+                documentIngestionService.ingestBook(savedId);
+                log.info("Auto-ingestion completed for book: {}", savedId);
+            } catch (Exception e) {
+                log.error("Auto-ingestion failed for book: " + savedId, e);
+            }
+        }, "book-ingest-" + savedId).start();
+
         BookResponse response = mapToResponse(saved);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -132,6 +145,18 @@ public class AdminBookController {
         }
 
         Book updated = bookRepository.save(book);
+
+        // Re-ingest updated book into ChromaDB (async)
+        final UUID updatedId = updated.getId();
+        new Thread(() -> {
+            try {
+                documentIngestionService.ingestBook(updatedId);
+                log.info("Auto re-ingestion completed for book: {}", updatedId);
+            } catch (Exception e) {
+                log.error("Auto re-ingestion failed for book: " + updatedId, e);
+            }
+        }, "book-reingest-" + updatedId).start();
+
         return ResponseEntity.ok(mapToResponse(updated));
     }
 
@@ -139,6 +164,13 @@ public class AdminBookController {
     public ResponseEntity<Void> deleteBook(@PathVariable UUID id) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Book", "id", id));
+
+        // Delete vectors from ChromaDB
+        try {
+            documentIngestionService.deleteBookVectors(id);
+        } catch (Exception e) {
+            log.error("Failed to delete vectors for book: " + id, e);
+        }
 
         // Delete book file from disk
         deleteFileIfExists(book.getFilePath());
@@ -183,7 +215,8 @@ public class AdminBookController {
     private void deleteFileIfExists(String pathStr) {
         if (pathStr != null) {
             try {
-                Files.deleteIfExists(Paths.get(pathStr));
+                String filename = pathStr.substring(Math.max(pathStr.lastIndexOf('/'), pathStr.lastIndexOf('\\')) + 1);
+                Files.deleteIfExists(Paths.get(uploadDir).resolve(filename));
             } catch (IOException e) {
                 log.error("Failed to delete file: " + pathStr, e);
             }

@@ -1,4 +1,4 @@
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link, useRouter, useLocation } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/AuthContext";
 import { BookOpen, Bookmark, Shield, LogOut, LogIn, Sparkles } from "lucide-react";
 import { useState } from "react";
@@ -6,6 +6,8 @@ import { useState } from "react";
 export function Navbar() {
   const { user, logout } = useAuth();
   const router = useRouter();
+  const location = useLocation();
+  const isLandingPage = location.pathname === "/";
   const [open, setOpen] = useState(false);
 
   const handleLogout = () => {
@@ -26,7 +28,7 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
-          <NavLink to="/library" icon={<BookOpen className="w-4 h-4" />} label="Library" />
+          {!isLandingPage && <NavLink to="/library" icon={<BookOpen className="w-4 h-4" />} label="Library" />}
           {user && <NavLink to="/wishlist" icon={<Bookmark className="w-4 h-4" />} label="Wishlist" />}
           {user?.role === "ADMIN" && (
             <NavLink to="/admin" icon={<Shield className="w-4 h-4" />} label="Admin" />
