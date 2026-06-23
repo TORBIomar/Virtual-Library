@@ -2,7 +2,7 @@
 
 A stunning, AI-powered digital library reading platform. This project provides a distraction-free environment to read books, write reviews, and maintain a wishlist, while integrating an intelligent AI companion powered by Gemini to help you analyze and understand the books as you read.
 
-![Zen Shelf Hub](https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=800)
+
 
 ## Features
 
