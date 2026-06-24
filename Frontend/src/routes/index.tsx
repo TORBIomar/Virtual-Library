@@ -19,8 +19,8 @@ function Landing() {
 
         <div className="relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-strong mb-10 animate-fade-in">
-            <div className="w-1.5 h-1.5 rounded-full bg-white/70 animate-pulse" />
-            <span className="text-[11px] uppercase tracking-[0.2em] text-white/60 font-medium">AI-powered reading companion</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-foreground/70 animate-pulse" />
+            <span className="text-[11px] uppercase tracking-[0.2em] text-foreground/60 font-medium">AI-powered reading companion</span>
           </div>
 
           <h1 className="font-display text-6xl md:text-8xl font-semibold tracking-tight leading-[1.02] animate-fade-in-scale">
@@ -82,7 +82,7 @@ function Landing() {
               className="hover-lift glass-strong rounded-2xl p-7 text-left animate-slide-up group"
               style={{ animationDelay: `${300 + f.delay}ms` }}
             >
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-white/10 to-white/[0.03] grid place-items-center mb-5 text-white/80 group-hover:text-white transition-colors border border-white/[0.06]">
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-white/10 to-white/[0.03] grid place-items-center mb-5 text-foreground/80 group-hover:text-foreground transition-colors border border-white/[0.06]">
                 {f.icon}
               </div>
               <h3 className="font-display font-semibold text-lg mb-2">{f.title}</h3>
@@ -95,8 +95,8 @@ function Landing() {
       {/* Quote band */}
       <section className="border-t border-b border-border/30 py-16 mb-20">
         <div className="max-w-3xl mx-auto px-6 text-center animate-fade-in">
-          <Quote className="w-8 h-8 text-white/10 mx-auto mb-6" />
-          <blockquote className="font-display text-xl md:text-2xl font-medium text-white/70 leading-relaxed italic">
+          <Quote className="w-8 h-8 text-foreground/10 mx-auto mb-6" />
+          <blockquote className="font-display text-xl md:text-2xl font-medium text-foreground/70 leading-relaxed italic">
             "A reader lives a thousand lives before he dies. The man who never reads lives only one."
           </blockquote>
           <cite className="block mt-4 text-sm text-muted-foreground not-italic">— George R.R. Martin</cite>
@@ -108,11 +108,11 @@ function Landing() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-white/10 to-white/[0.03] grid place-items-center border border-white/[0.06]">
-              <BookOpen className="w-3.5 h-3.5 text-white/70" />
+              <BookOpen className="w-3.5 h-3.5 text-foreground/70" />
             </div>
-            <span className="font-display font-medium text-sm text-white/50">SmartLibrary</span>
+            <span className="font-display font-medium text-sm text-foreground/50">SmartLibrary</span>
           </div>
-          <p className="text-white/30">© 2026 SmartLibrary. Crafted with care.</p>
+          <p className="text-foreground/30">© 2026 SmartLibrary. Crafted with care.</p>
         </div>
       </footer>
     </div>

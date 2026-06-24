@@ -146,6 +146,10 @@ export const userService = {
     const res = await apiClient.get<BackendUser[]>("/admin/users");
     return res.data.map(mapUser);
   },
+  create: async (name: string, email: string, password: string, role: string) => {
+    const res = await apiClient.post<BackendUser>("/users/register", { username: email, password, role });
+    return mapUser(res.data);
+  },
   remove: async (id: string) => {
     await apiClient.delete<void>(`/admin/users/${id}`);
   },

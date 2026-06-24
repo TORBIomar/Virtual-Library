@@ -16,6 +16,7 @@ interface LibraryState {
   removeBook: (id: string) => void;
   addReview: (bookId: string, rating: number, comment: string) => void;
   removeReview: (id: string) => void;
+  addUser: (name: string, email: string, password: string, role: string) => Promise<void>;
   removeUser: (id: string) => void;
   setUserRole: (id: string, role: User["role"]) => void;
   loadReviewsForBook: (bookId: string) => void;
@@ -129,6 +130,16 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const addUser = async (name: string, email: string, password: string, role: string) => {
+    try {
+      const newUser = await userService.create(name, email, password, role);
+      setUsers(prev => [newUser, ...prev]);
+    } catch (err) {
+      console.error("Failed to add user", err);
+      throw err;
+    }
+  };
+
   const removeUser = async (id: string) => {
     try {
       await userService.remove(id);
@@ -157,7 +168,7 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
       books, reviews, users, wishlist,
       toggleWishlist, isWishlisted,
       addBook, updateBook, removeBook,
-      addReview, removeReview, removeUser, setUserRole,
+      addReview, removeReview, addUser, removeUser, setUserRole,
       loadReviewsForBook,
     }}>
       {children}

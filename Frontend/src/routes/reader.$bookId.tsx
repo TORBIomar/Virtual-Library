@@ -35,7 +35,7 @@ function ReaderPage() {
       <div className="min-h-screen flex flex-col bg-background">
         <Navbar />
         <div className="flex-1 flex items-center justify-center">
-          <div className="w-6 h-6 border-2 border-white/20 border-t-white/80 rounded-full animate-spin" />
+          <div className="w-6 h-6 border-2 border-foreground/20 border-t-white/80 rounded-full animate-spin" />
         </div>
       </div>
     );
@@ -49,7 +49,7 @@ function ReaderPage() {
         <div className="text-center py-32">
           <BookOpen className="w-12 h-12 mx-auto mb-4 text-muted-foreground/40" />
           <p className="text-muted-foreground mb-3">Book not found.</p>
-          <Link to="/library" className="text-white/70 hover:text-white hover:underline mt-2 inline-flex items-center gap-1.5 text-sm transition-colors">
+          <Link to="/library" className="text-foreground/70 hover:text-foreground hover:underline mt-2 inline-flex items-center gap-1.5 text-sm transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back to library
           </Link>
         </div>

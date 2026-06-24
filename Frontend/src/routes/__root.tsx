@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LibraryProvider } from "@/contexts/LibraryContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AIChat } from "@/components/AIChat";
 
 function NotFoundComponent() {
@@ -100,12 +101,14 @@ function RootComponent() {
   const showGlobalChat = !location.startsWith("/reader/");
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <LibraryProvider>
-          <Outlet />
-          {showGlobalChat && <AIChat />}
-        </LibraryProvider>
-      </AuthProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="smartlib-theme">
+        <AuthProvider>
+          <LibraryProvider>
+            <Outlet />
+            {showGlobalChat && <AIChat />}
+          </LibraryProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

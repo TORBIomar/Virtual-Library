@@ -87,7 +87,7 @@ export function BookReader({ book }: { book: Book }) {
       <header className={`px-6 h-14 flex items-center justify-between border-b border-border/20 ${zenMode ? "opacity-0 hover:opacity-100 transition-opacity duration-300" : ""}`}>
         <div className="min-w-0 flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-white/8 to-white/[0.02] grid place-items-center border border-white/[0.06] shrink-0">
-            <BookOpen className="w-4 h-4 text-white/60" />
+            <BookOpen className="w-4 h-4 text-foreground/60" />
           </div>
           <div className="min-w-0">
             <h2 className="font-display font-semibold truncate text-sm">{book.title}</h2>
@@ -99,7 +99,7 @@ export function BookReader({ book }: { book: Book }) {
           <div className="flex items-center gap-0.5 mr-2">
             <button
               onClick={() => setFontSize((s) => Math.max(12, s - 1))}
-              className="p-1.5 rounded-md hover:bg-surface text-white/40 hover:text-white/70 transition-colors cursor-pointer"
+              className="p-1.5 rounded-md hover:bg-surface text-foreground/40 hover:text-foreground/70 transition-colors cursor-pointer"
               title="Decrease font size"
             >
               <Type className="w-3 h-3" />
@@ -107,7 +107,7 @@ export function BookReader({ book }: { book: Book }) {
             <span className="text-[10px] text-muted-foreground w-6 text-center font-mono">{fontSize}</span>
             <button
               onClick={() => setFontSize((s) => Math.min(24, s + 1))}
-              className="p-1.5 rounded-md hover:bg-surface text-white/40 hover:text-white/70 transition-colors cursor-pointer"
+              className="p-1.5 rounded-md hover:bg-surface text-foreground/40 hover:text-foreground/70 transition-colors cursor-pointer"
               title="Increase font size"
             >
               <Type className="w-4 h-4" />
@@ -116,7 +116,7 @@ export function BookReader({ book }: { book: Book }) {
           {/* Zen mode */}
           <button
             onClick={() => setZenMode(!zenMode)}
-            className="p-2 rounded-md hover:bg-surface text-white/40 hover:text-white/70 transition-colors cursor-pointer"
+            className="p-2 rounded-md hover:bg-surface text-foreground/40 hover:text-foreground/70 transition-colors cursor-pointer"
             title={zenMode ? "Exit zen mode" : "Zen mode"}
           >
             {zenMode ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -124,9 +124,9 @@ export function BookReader({ book }: { book: Book }) {
           {/* Download */}
           <button
             onClick={download}
-            className="btn-shine relative inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface hover:bg-surface-elevated border border-border/40 text-sm transition-all hover:border-white/10 cursor-pointer"
+            className="btn-shine relative inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface hover:bg-surface-elevated border border-border/40 text-sm transition-all hover:border-foreground/10 cursor-pointer"
           >
-            <Download className="w-4 h-4 text-white/60" /> <span className="text-white/70">Download</span>
+            <Download className="w-4 h-4 text-foreground/60" /> <span className="text-foreground/70">Download</span>
           </button>
         </div>
       </header>
@@ -147,7 +147,7 @@ export function BookReader({ book }: { book: Book }) {
 
           {/* Book content */}
           <article
-            className="font-serif leading-[2.1] text-foreground/85 whitespace-pre-wrap animate-fade-in selection:bg-white/15 selection:text-white"
+            className="font-serif leading-[2.1] text-foreground/85 whitespace-pre-wrap animate-fade-in selection:bg-foreground/15 selection:text-foreground"
             style={{ fontSize: `${fontSize}px` }}
             key={page}
           >
@@ -156,9 +156,9 @@ export function BookReader({ book }: { book: Book }) {
 
           {/* Page end ornament */}
           <div className="flex items-center justify-center mt-12 gap-2">
-            <div className="w-1 h-1 rounded-full bg-white/10" />
-            <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
-            <div className="w-1 h-1 rounded-full bg-white/10" />
+            <div className="w-1 h-1 rounded-full bg-foreground/10" />
+            <div className="w-1.5 h-1.5 rounded-full bg-foreground/15" />
+            <div className="w-1 h-1 rounded-full bg-foreground/10" />
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@ export function BookReader({ book }: { book: Book }) {
         <button
           onClick={() => setPage((p) => Math.max(0, p - 1))}
           disabled={page === 0}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg hover:bg-surface disabled:opacity-20 disabled:cursor-not-allowed transition-colors text-sm text-white/60 hover:text-white cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg hover:bg-surface disabled:opacity-20 disabled:cursor-not-allowed transition-colors text-sm text-foreground/60 hover:text-foreground cursor-pointer"
         >
           <ChevronLeft className="w-4 h-4" /> Previous
         </button>
@@ -180,10 +180,10 @@ export function BookReader({ book }: { book: Book }) {
               onClick={() => setPage(i)}
               className={`rounded-full transition-all duration-300 cursor-pointer ${
                 i === page
-                  ? "w-8 h-1.5 bg-white/70"
+                  ? "w-8 h-1.5 bg-foreground/70"
                   : i < page
-                    ? "w-1.5 h-1.5 bg-white/25"
-                    : "w-1.5 h-1.5 bg-white/10 hover:bg-white/25"
+                    ? "w-1.5 h-1.5 bg-foreground/25"
+                    : "w-1.5 h-1.5 bg-foreground/10 hover:bg-foreground/25"
               }`}
               aria-label={`Page ${i + 1}`}
             />
@@ -193,7 +193,7 @@ export function BookReader({ book }: { book: Book }) {
         <button
           onClick={() => setPage((p) => Math.min(total - 1, p + 1))}
           disabled={page === total - 1}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg hover:bg-surface disabled:opacity-20 disabled:cursor-not-allowed transition-colors text-sm text-white/60 hover:text-white cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg hover:bg-surface disabled:opacity-20 disabled:cursor-not-allowed transition-colors text-sm text-foreground/60 hover:text-foreground cursor-pointer"
         >
           Next <ChevronRight className="w-4 h-4" />
         </button>

@@ -31,7 +31,7 @@ function BookDetailsPage() {
         <div className="text-center py-32">
           <BookOpen className="w-12 h-12 mx-auto mb-4 text-muted-foreground/40" />
           <p className="text-muted-foreground mb-3">Book not found.</p>
-          <Link to="/library" className="text-white/70 hover:text-white hover:underline mt-2 inline-flex items-center gap-1.5 text-sm transition-colors">
+          <Link to="/library" className="text-foreground/70 hover:text-foreground hover:underline mt-2 inline-flex items-center gap-1.5 text-sm transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back to library
           </Link>
         </div>
@@ -46,7 +46,7 @@ function BookDetailsPage() {
       <Navbar />
 
       <main className="flex-1 max-w-5xl w-full mx-auto px-6 py-12 md:py-20 animate-fade-in">
-        <Link to="/library" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-white transition-colors mb-12">
+        <Link to="/library" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-12">
           <ArrowLeft className="w-4 h-4" /> Back to library
         </Link>
 
@@ -84,7 +84,7 @@ function BookDetailsPage() {
             <div className="flex items-center gap-4 pt-6 border-t border-border/30">
               <button 
                 onClick={() => navigate({ to: "/reader/$bookId", params: { bookId: book.id } })}
-                className="btn-shine relative flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-all cursor-pointer"
+                className="btn-shine relative flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full bg-foreground text-background font-semibold hover:bg-foreground/90 transition-all cursor-pointer"
               >
                 <Play className="w-4 h-4 fill-black" />
                 Read Now
@@ -94,8 +94,8 @@ function BookDetailsPage() {
                 onClick={() => toggleWishlist(book.id)}
                 className={`p-3 rounded-full border transition-all cursor-pointer ${
                   saved 
-                    ? "bg-white/10 border-white/20 text-white" 
-                    : "glass border-transparent text-muted-foreground hover:text-white"
+                    ? "bg-foreground/10 border-foreground/20 text-foreground" 
+                    : "glass border-transparent text-muted-foreground hover:text-foreground"
                 }`}
                 title={saved ? "Remove from wishlist" : "Add to wishlist"}
               >
@@ -134,7 +134,7 @@ function BookDetailsPage() {
               <div key={r.id} className="glass-strong rounded-xl p-6 animate-fade-in">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-white/12 to-white/[0.03] grid place-items-center text-xs font-semibold text-white/70 border border-white/[0.06]">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-white/12 to-white/[0.03] grid place-items-center text-xs font-semibold text-foreground/70 border border-white/[0.06]">
                       {r.userName[0]?.toUpperCase()}
                     </div>
                     <div>
@@ -172,7 +172,7 @@ function ReviewForm({ bookId, onSubmit }: { bookId: string; onSubmit: (id: strin
         <div className="flex gap-1">
           {[1, 2, 3, 4, 5].map((n) => (
             <button key={n} type="button" onClick={() => setRating(n)} className="transition-transform hover:scale-125 cursor-pointer">
-              <Star className={`w-5 h-5 ${n <= rating ? "fill-white/80 text-white/80" : "text-muted-foreground/40"}`} />
+              <Star className={`w-5 h-5 ${n <= rating ? "fill-white/80 text-foreground/80" : "text-muted-foreground/40"}`} />
             </button>
           ))}
         </div>
@@ -182,7 +182,7 @@ function ReviewForm({ bookId, onSubmit }: { bookId: string; onSubmit: (id: strin
         onChange={(e) => setComment(e.target.value)}
         placeholder="Share what stayed with you…"
         rows={3}
-        className="w-full bg-input rounded-lg p-3 text-sm outline-none focus:ring-2 focus:ring-ring/50 resize-none border border-transparent focus:border-white/10 transition-all"
+        className="w-full bg-input rounded-lg p-3 text-sm outline-none focus:ring-2 focus:ring-ring/50 resize-none border border-transparent focus:border-foreground/10 transition-all"
       />
       <button type="submit" className="btn-shine relative px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors cursor-pointer">
         Post review
@@ -196,7 +196,7 @@ function StarRow({ rating, small = false }: { rating: number; small?: boolean })
   return (
     <div className="flex gap-0.5">
       {[1, 2, 3, 4, 5].map((n) => (
-        <Star key={n} className={`${size} ${n <= rating ? "fill-white/70 text-white/70" : "text-muted-foreground/30"}`} />
+        <Star key={n} className={`${size} ${n <= rating ? "fill-white/70 text-foreground/70" : "text-muted-foreground/30"}`} />
       ))}
     </div>
   );

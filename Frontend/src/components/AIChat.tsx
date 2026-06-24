@@ -140,14 +140,14 @@ function ChatHeader({ book, onClose }: { book?: Book; onClose?: () => void }) {
       <div className="flex items-center gap-3">
         <div className="relative">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-white/10 to-white/[0.03] grid place-items-center animate-pulse-glow border border-white/[0.06]">
-            <Sparkles className="w-4 h-4 text-white/80" />
+            <Sparkles className="w-4 h-4 text-foreground/80" />
           </div>
           <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400/80 border-2 border-background" />
         </div>
         <div>
-          <div className="text-sm font-semibold text-white/90 flex items-center gap-1.5">
+          <div className="text-sm font-semibold text-foreground/90 flex items-center gap-1.5">
             ZenShelf AI
-            <span className="text-[9px] px-1.5 py-0.5 rounded bg-white/5 border border-white/8 text-white/40 font-normal uppercase tracking-wider">Gemini</span>
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-foreground/5 border border-foreground/8 text-foreground/40 font-normal uppercase tracking-wider">Gemini</span>
           </div>
           <div className="text-[10px] text-muted-foreground uppercase tracking-widest">
             {book ? "Context-aware · RAG" : "Library companion"}
@@ -156,7 +156,7 @@ function ChatHeader({ book, onClose }: { book?: Book; onClose?: () => void }) {
       </div>
       {onClose && (
         <button onClick={onClose} className="p-1.5 rounded-md hover:bg-surface transition-colors cursor-pointer" aria-label="Close chat">
-          <X className="w-4 h-4 text-white/40" />
+          <X className="w-4 h-4 text-foreground/40" />
         </button>
       )}
     </header>
@@ -175,15 +175,15 @@ function ChatMessages({ msgs, thinking, endRef }: {
           <div className="max-w-[88%] space-y-1.5">
             <div className={`px-4 py-3 text-sm leading-relaxed ${
               m.role === "user"
-                ? "bg-white/10 text-white/90 rounded-2xl rounded-br-md"
+                ? "bg-foreground/10 text-foreground/90 rounded-2xl rounded-br-md"
                 : "bg-surface text-foreground/85 rounded-2xl rounded-bl-md border border-border/20"
             }`}>
               {m.text}
             </div>
             {m.sources && m.sources.length > 0 && (
               <div className="flex items-center gap-1 px-1">
-                <Zap className="w-3 h-3 text-white/20" />
-                <span className="text-[10px] text-white/25">Sources: {m.sources.join(", ")}</span>
+                <Zap className="w-3 h-3 text-foreground/20" />
+                <span className="text-[10px] text-foreground/25">Sources: {m.sources.join(", ")}</span>
               </div>
             )}
           </div>
@@ -192,9 +192,9 @@ function ChatMessages({ msgs, thinking, endRef }: {
       {thinking && (
         <div className="flex justify-start">
           <div className="bg-surface px-5 py-3.5 rounded-2xl rounded-bl-md flex gap-1.5 border border-border/20">
-            <span className="w-1.5 h-1.5 rounded-full bg-white/30 animate-bounce" style={{ animationDelay: "0ms" }} />
-            <span className="w-1.5 h-1.5 rounded-full bg-white/30 animate-bounce" style={{ animationDelay: "150ms" }} />
-            <span className="w-1.5 h-1.5 rounded-full bg-white/30 animate-bounce" style={{ animationDelay: "300ms" }} />
+            <span className="w-1.5 h-1.5 rounded-full bg-foreground/30 animate-bounce" style={{ animationDelay: "0ms" }} />
+            <span className="w-1.5 h-1.5 rounded-full bg-foreground/30 animate-bounce" style={{ animationDelay: "150ms" }} />
+            <span className="w-1.5 h-1.5 rounded-full bg-foreground/30 animate-bounce" style={{ animationDelay: "300ms" }} />
           </div>
         </div>
       )}
@@ -211,7 +211,7 @@ function QuickPrompts({ prompts, onSelect, disabled }: { prompts: string[]; onSe
           key={p}
           onClick={() => onSelect(p)}
           disabled={disabled}
-          className="text-[11px] px-3 py-1.5 rounded-full bg-surface hover:bg-surface-elevated border border-border/30 hover:border-white/10 transition-all text-white/50 hover:text-white/80 cursor-pointer disabled:opacity-40"
+          className="text-[11px] px-3 py-1.5 rounded-full bg-background hover:bg-surface border border-border/50 hover:border-foreground/20 transition-all text-foreground/70 hover:text-foreground cursor-pointer disabled:opacity-40 shadow-sm"
         >
           {p}
         </button>
@@ -236,7 +236,7 @@ function ChatInput({ value, onChange, onSend, disabled }: {
         onChange={(e) => onChange(e.target.value)}
         placeholder="Ask anything about books…"
         disabled={disabled}
-        className="flex-1 bg-input rounded-lg px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring/50 transition-shadow border border-transparent focus:border-white/10 disabled:opacity-60"
+        className="flex-1 bg-input rounded-lg px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring/50 transition-shadow border border-transparent focus:border-foreground/10 disabled:opacity-60"
       />
       <button
         type="submit"

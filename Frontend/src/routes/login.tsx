@@ -32,7 +32,7 @@ function LoginPage() {
       <div className="w-full max-w-md">
         <Link to="/" className="flex items-center gap-2.5 justify-center mb-12">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-white/12 to-white/[0.03] grid place-items-center border border-white/[0.08]">
-            <BookOpen className="w-5 h-5 text-white/80" />
+            <BookOpen className="w-5 h-5 text-foreground/80" />
           </div>
           <span className="font-display font-semibold text-xl">
             Smart<span className="text-gradient">Library</span>
@@ -57,7 +57,7 @@ function LoginPage() {
           </form>
 
           <div className="mt-4 text-sm text-center">
-            New here? <Link to="/register" className="text-white/80 hover:text-white hover:underline transition-colors">Create an account</Link>
+            New here? <Link to="/register" className="text-foreground/80 hover:text-foreground hover:underline transition-colors">Create an account</Link>
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@ export function Field({ icon, label, type, value, onChange }: {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           required
-          className="w-full bg-input rounded-lg pl-10 pr-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring/50 transition-shadow border border-transparent focus:border-white/10"
+          className="w-full bg-input rounded-lg pl-10 pr-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring/50 transition-shadow border border-transparent focus:border-foreground/10"
         />
       </div>
     </label>

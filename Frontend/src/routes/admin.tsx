@@ -28,7 +28,7 @@ function AdminPage() {
           <h2 className="font-display text-xl font-semibold mb-2">Supervisor access only</h2>
           <p className="text-sm text-muted-foreground mb-5">Sign in as an admin to access this dashboard.</p>
           <Link to="/login" className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-medium inline-block hover:bg-primary/90 transition-colors">Sign in</Link>
-          <p className="text-xs text-muted-foreground mt-4">Hint: <code className="text-white/60 bg-white/5 px-1.5 py-0.5 rounded">admin@smartlib.dev</code></p>
+          <p className="text-xs text-muted-foreground mt-4">Hint: <code className="text-foreground/60 bg-foreground/5 px-1.5 py-0.5 rounded">admin@smartlib.dev</code></p>
         </div>
       </div>
     );
@@ -142,7 +142,7 @@ function AiSettingsTab() {
       {/* Header card */}
       <div className="glass-strong rounded-2xl p-6 flex items-start gap-4">
         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/10 to-white/[0.03] grid place-items-center border border-white/[0.06] shrink-0">
-          <Brain className="w-6 h-6 text-white/70" />
+          <Brain className="w-6 h-6 text-foreground/70" />
         </div>
         <div>
           <h3 className="font-display font-semibold text-lg mb-1">AI Configuration</h3>
@@ -157,12 +157,12 @@ function AiSettingsTab() {
         {/* API Key */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <Key className="w-4 h-4 text-white/50" />
+            <Key className="w-4 h-4 text-foreground/50" />
             <span className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-medium">API Key</span>
           </div>
           {settings && (
             <div className="mb-2 text-xs text-muted-foreground">
-              Current: <code className="text-white/60 bg-white/5 px-1.5 py-0.5 rounded font-mono">{settings.apiKeyMasked}</code>
+              Current: <code className="text-foreground/60 bg-foreground/5 px-1.5 py-0.5 rounded font-mono">{settings.apiKeyMasked}</code>
             </div>
           )}
           <input
@@ -170,14 +170,14 @@ function AiSettingsTab() {
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
             placeholder="Enter new API key (leave blank to keep current)"
-            className="w-full bg-input rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring/50 border border-transparent focus:border-white/10 transition-all font-mono"
+            className="w-full bg-input rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring/50 border border-transparent focus:border-foreground/10 transition-all font-mono"
           />
         </div>
 
         {/* Model Selection */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <Sparkles className="w-4 h-4 text-white/50" />
+            <Sparkles className="w-4 h-4 text-foreground/50" />
             <span className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-medium">Model</span>
           </div>
           <div className="grid sm:grid-cols-2 gap-2">
@@ -188,15 +188,15 @@ function AiSettingsTab() {
                 onClick={() => setModel(m.value)}
                 className={`text-left p-4 rounded-xl border transition-all cursor-pointer ${
                   model === m.value
-                    ? "bg-white/8 border-white/15 shadow-[0_0_20px_-5px_oklch(0.8_0_0_/_0.1)]"
-                    : "bg-surface/50 border-border/30 hover:border-white/10 hover:bg-surface"
+                    ? "bg-foreground/8 border-foreground/15 shadow-[0_0_20px_-5px_oklch(0.8_0_0_/_0.1)]"
+                    : "bg-surface/50 border-border/30 hover:border-foreground/10 hover:bg-surface"
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-sm font-medium">{m.label}</span>
                   {model === m.value && (
-                    <div className="w-5 h-5 rounded-full bg-white/90 grid place-items-center">
-                      <Check className="w-3 h-3 text-black" />
+                    <div className="w-5 h-5 rounded-full bg-foreground/90 grid place-items-center">
+                      <Check className="w-3 h-3 text-background" />
                     </div>
                   )}
                 </div>
@@ -210,10 +210,10 @@ function AiSettingsTab() {
         <div>
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Thermometer className="w-4 h-4 text-white/50" />
+              <Thermometer className="w-4 h-4 text-foreground/50" />
               <span className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-medium">Temperature</span>
             </div>
-            <span className="text-sm font-mono text-white/60">{temperature.toFixed(1)}</span>
+            <span className="text-sm font-mono text-foreground/60">{temperature.toFixed(1)}</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="text-[10px] text-muted-foreground">Precise</span>
@@ -237,15 +237,15 @@ function AiSettingsTab() {
             <div className="grid grid-cols-3 gap-4 text-sm">
               <div>
                 <div className="text-[10px] text-muted-foreground mb-0.5">Model</div>
-                <div className="font-mono text-white/80 text-xs">{settings.model}</div>
+                <div className="font-mono text-foreground/80 text-xs">{settings.model}</div>
               </div>
               <div>
                 <div className="text-[10px] text-muted-foreground mb-0.5">Temperature</div>
-                <div className="font-mono text-white/80 text-xs">{settings.temperature}</div>
+                <div className="font-mono text-foreground/80 text-xs">{settings.temperature}</div>
               </div>
               <div>
                 <div className="text-[10px] text-muted-foreground mb-0.5">Embedding</div>
-                <div className="font-mono text-white/80 text-xs">{settings.embeddingModel}</div>
+                <div className="font-mono text-foreground/80 text-xs">{settings.embeddingModel}</div>
               </div>
             </div>
           </div>
@@ -341,7 +341,7 @@ function BooksTab() {
                 <select
                   value={form.category}
                   onChange={(e) => setForm({ ...form, category: e.target.value })}
-                  className="mt-1.5 w-full bg-input rounded-lg px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring/50 border border-transparent focus:border-white/10"
+                  className="mt-1.5 w-full bg-input rounded-lg px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring/50 border border-transparent focus:border-foreground/10"
                 >
                   {CATEGORIES.filter((c) => c !== "All").map((c) => <option key={c}>{c}</option>)}
                 </select>
@@ -353,7 +353,7 @@ function BooksTab() {
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
                 rows={4}
-                className="mt-1.5 w-full bg-input rounded-lg p-3 text-sm outline-none focus:ring-2 focus:ring-ring/50 resize-none border border-transparent focus:border-white/10"
+                className="mt-1.5 w-full bg-input rounded-lg p-3 text-sm outline-none focus:ring-2 focus:ring-ring/50 resize-none border border-transparent focus:border-foreground/10"
               />
             </label>
           </div>
@@ -406,9 +406,60 @@ function BooksTab() {
 /* ========================= USERS TAB ========================= */
 
 function UsersTab() {
-  const { users, removeUser, setUserRole } = useLibrary();
+  const { users, removeUser, setUserRole, addUser } = useLibrary();
+  const [open, setOpen] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", password: "", role: "READER" });
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await addUser(form.name, form.email, form.password, form.role);
+      setForm({ name: "", email: "", password: "", role: "READER" });
+      setOpen(false);
+    } catch (err: any) {
+      alert("Failed to add user: " + (err.response?.data?.message || err.message));
+    }
+  };
+
   return (
-    <div className="glass-strong rounded-2xl overflow-hidden">
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <p className="text-sm text-muted-foreground">{users.length} users registered</p>
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="btn-shine relative inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all shadow-glow cursor-pointer"
+        >
+          <Plus className="w-4 h-4" /> {open ? "Cancel" : "Add user"}
+        </button>
+      </div>
+
+      {open && (
+        <form onSubmit={submit} className="glass-strong rounded-2xl p-6 grid md:grid-cols-2 gap-5 animate-fade-in">
+          <div className="space-y-4">
+            <Input label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} required />
+            <Input label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} required />
+          </div>
+          <div className="space-y-4">
+            <Input label="Password" type="password" value={form.password} onChange={(v) => setForm({ ...form, password: v })} required />
+            <label className="block">
+              <span className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-medium">Role</span>
+              <select
+                value={form.role}
+                onChange={(e) => setForm({ ...form, role: e.target.value })}
+                className="mt-1.5 w-full bg-input rounded-lg px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring/50 border border-transparent focus:border-foreground/10"
+              >
+                <option value="READER">READER</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            </label>
+            <button type="submit" className="btn-shine relative w-full py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all shadow-glow cursor-pointer">
+              Add User
+            </button>
+          </div>
+        </form>
+      )}
+
+      <div className="glass-strong rounded-2xl overflow-hidden">
       <table className="w-full text-sm">
         <thead className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground font-medium">
           <tr className="border-b border-border/30">
@@ -445,6 +496,7 @@ function UsersTab() {
         </tbody>
       </table>
     </div>
+    </div>
   );
 }
 
@@ -468,7 +520,7 @@ function ReviewsTab() {
               <div className="flex items-center gap-2 mb-1 text-xs text-muted-foreground">
                 <span className="font-medium text-foreground">{r.userName}</span> · {book?.title ?? "Unknown"} · {r.createdAt} · {r.rating}★
               </div>
-              <p className="text-sm text-white/80">{r.comment}</p>
+              <p className="text-sm text-foreground/80">{r.comment}</p>
             </div>
             <button onClick={() => removeReview(r.id)} className="text-destructive hover:bg-destructive/10 rounded-md p-1.5 shrink-0 cursor-pointer">
               <Trash2 className="w-4 h-4" />
@@ -493,7 +545,7 @@ function Input({ label, value, onChange, type = "text", required }: {
         value={value}
         required={required}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1.5 w-full bg-input rounded-lg px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring/50 border border-transparent focus:border-white/10 transition-all"
+        className="mt-1.5 w-full bg-input rounded-lg px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring/50 border border-transparent focus:border-foreground/10 transition-all"
       />
     </label>
   );

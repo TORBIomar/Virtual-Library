@@ -23,7 +23,7 @@ export function BookCard({ book, index = 0 }: { book: Book; index?: number }) {
             className="w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-70" />
-          <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full glass-strong text-[10px] uppercase tracking-widest font-medium text-white/70">
+          <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full glass-strong text-[10px] uppercase tracking-widest font-medium text-foreground/70">
             {book.category}
           </div>
         </div>
@@ -34,7 +34,7 @@ export function BookCard({ book, index = 0 }: { book: Book; index?: number }) {
           onClick={(e) => { e.preventDefault(); toggleWishlist(book.id); }}
           aria-label={saved ? "Remove from wishlist" : "Save for later"}
           className={`absolute top-3 right-3 w-9 h-9 rounded-full grid place-items-center transition-all cursor-pointer ${
-            saved ? "bg-white/90 text-black shadow-glow scale-100" : "glass-strong hover:scale-110 text-white/60 hover:text-white"
+            saved ? "bg-foreground/90 text-background shadow-glow scale-100" : "glass-strong hover:scale-110 text-foreground/60 hover:text-foreground"
           }`}
         >
           <Bookmark className={`w-4 h-4 ${saved ? "fill-current" : ""}`} />
@@ -47,7 +47,7 @@ export function BookCard({ book, index = 0 }: { book: Book; index?: number }) {
         <Link
           to="/reader/$bookId"
           params={{ bookId: book.id }}
-          className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-white/60 hover:text-white hover:gap-2.5 transition-all"
+          className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-foreground/60 hover:text-foreground hover:gap-2.5 transition-all"
         >
           <BookOpen className="w-3.5 h-3.5" /> Read now
         </Link>
